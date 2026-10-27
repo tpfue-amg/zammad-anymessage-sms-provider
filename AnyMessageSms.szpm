@@ -1,0 +1,73 @@
+{
+  "name": "AnyMessageSms",
+  "version": "0.1.3",
+  "vendor": "anymessage",
+  "license": "AGPL-3.0",
+  "url": "https://github.com/tpfue-amg/zammad-anymessage-sms-provider",
+  "change_log": [
+    {
+      "version": "0.1.3",
+      "date": "2026-10-14",
+      "log": "Delivery reports now use /api/v1/sms_any_message/dlr/:token only, matching Zammad's route style. The token is required. /api/v1/callbacks/sms-anymessage is removed, so AnyMessage must update the DLR push URL. Inbound SMS mapping follows the real AMG MO push (sender.msisdn, content.text, messageId, messageTimestamp); the recipient number is not sent by AMG yet."
+    },
+    {
+      "version": "0.1.2",
+      "date": "2026-10-09",
+      "log": "Accept the real AMG delivery report callback: GET /api/v1/callbacks/sms-anymessage with message_id and status_code query parameters, no token required."
+    },
+    {
+      "version": "0.1.1",
+      "date": "2026-10-05",
+      "log": "Show plain error messages in the SMS test dialog instead of HTML-escaped Ruby inspect output."
+    },
+    {
+      "version": "0.1.0",
+      "date": "2026-10-02",
+      "log": "Initial scaffold: outbound SMS, inbound SMS and delivery reports (payload mapping pending)."
+    }
+  ],
+  "description": [
+    {
+      "language": "en",
+      "text": "SMS channel driver for the AnyMessage Gateway (AMG)."
+    }
+  ],
+  "files": [
+    {
+      "location": "app/models/channel/driver/sms/any_message.rb",
+      "permission": 644
+    },
+    {
+      "location": "app/models/channel/driver/sms/any_message/inbound_message.rb",
+      "permission": 644
+    },
+    {
+      "location": "app/models/channel/driver/sms/any_message/delivery_report.rb",
+      "permission": 644
+    },
+    {
+      "location": "app/models/channel/driver/sms/any_message/message_id_collector.rb",
+      "permission": 644
+    },
+    {
+      "location": "app/models/channel/driver/sms/any_message/communicate_sms_job_extension.rb",
+      "permission": 644
+    },
+    {
+      "location": "app/models/channel/driver/sms/any_message/channels_sms_controller_extension.rb",
+      "permission": 644
+    },
+    {
+      "location": "app/controllers/channels_sms_any_message_controller.rb",
+      "permission": 644
+    },
+    {
+      "location": "config/routes/channel_sms_any_message.rb",
+      "permission": 644
+    },
+    {
+      "location": "config/initializers/any_message_sms.rb",
+      "permission": 644
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Builds the installable Zammad package (.zpm) from AnyMessageSms.szpm and the source tree.
+# Usage: bin/build-package [output_dir]
+
+require 'base64'
+require 'json'
+require 'time'
+
+root       = File.expand_path('..', __dir__)
+definition = JSON.parse(File.read(File.join(root, 'AnyMessageSms.szpm')))
+output_dir = ARGV[0] || File.join(root, 'dist')
+
+definition['buildhost'] = ENV.fetch('BUILD_HOST', 'localhost')
+definition['builddate'] = Time.now.utc.iso8601
+definition['files'] = definition['files'].map do |file|
+  path = File.join(root, file['location'])
+  abort "Missing file: #{file['location']}" if !File.exist?(path)
+
+  file.merge('encode' => 'base64', 'content' => Base64.strict_encode64(File.binread(path)))
+end
+
+Dir.mkdir(output_dir) if !Dir.exist?(output_dir)
+target = File.join(output_dir, "#{definition['name']}-#{definition['version']}.zpm")
+File.write(target, JSON.pretty_generate(definition))
+
+puts "Built #{target}"

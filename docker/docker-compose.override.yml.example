@@ -1,0 +1,18 @@
+# Mounts the AnyMessage SMS provider into the Rails services of zammad-docker-compose.
+# Copy to docker-compose.override.yml next to docker-compose.yml and set ANYMESSAGE_SRC
+# to the location of this repository on the host (default: /opt/any-zammad-sms-provider).
+
+x-anymessage-volumes: &anymessage-volumes
+  - ${ANYMESSAGE_SRC:-/opt/any-zammad-sms-provider}/app/models/channel/driver/sms/any_message.rb:/opt/zammad/app/models/channel/driver/sms/any_message.rb:ro
+  - ${ANYMESSAGE_SRC:-/opt/any-zammad-sms-provider}/app/models/channel/driver/sms/any_message:/opt/zammad/app/models/channel/driver/sms/any_message:ro
+  - ${ANYMESSAGE_SRC:-/opt/any-zammad-sms-provider}/app/controllers/channels_sms_any_message_controller.rb:/opt/zammad/app/controllers/channels_sms_any_message_controller.rb:ro
+  - ${ANYMESSAGE_SRC:-/opt/any-zammad-sms-provider}/config/routes/channel_sms_any_message.rb:/opt/zammad/config/routes/channel_sms_any_message.rb:ro
+  - ${ANYMESSAGE_SRC:-/opt/any-zammad-sms-provider}/config/initializers/any_message_sms.rb:/opt/zammad/config/initializers/any_message_sms.rb:ro
+
+services:
+  zammad-railsserver:
+    volumes: *anymessage-volumes
+  zammad-scheduler:
+    volumes: *anymessage-volumes
+  zammad-websocket:
+    volumes: *anymessage-volumes

@@ -1,0 +1,8 @@
+.git/
+.claude/
+dist/
+docker/
+spec/
+bin/
+*.md
+*.szpm

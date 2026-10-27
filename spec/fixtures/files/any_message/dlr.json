@@ -1,0 +1,13 @@
+{
+  "message_id": "sms-6f61a982-5ef3-4aa3-972c-9038e312dfb9",
+  "submit_date": "2026-10-09 08:58",
+  "done_date": "2026-10-09 08:58",
+  "status_code": "2",
+  "status": "delivered",
+  "error_code": "0",
+  "error": "no error",
+  "type": "sms",
+  "submitted": "001",
+  "delivered": "001",
+  "text": ""
+}

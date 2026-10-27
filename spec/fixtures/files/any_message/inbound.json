@@ -1,0 +1,14 @@
+{
+  "type": "mo",
+  "messageId": "sms-mo-01a13582-b400-7d56-95f2-3a99858a0ae1",
+  "sender": {
+    "msisdn": "491710000001"
+  },
+  "recipient": {
+    "integrationUuid": "example-integration-uuid"
+  },
+  "content": {
+    "text": "Help, my order is late\n\nSent 2026-10-13 13:45 UTC"
+  },
+  "messageTimestamp": "2026-10-13T13:45:20Z"
+}
